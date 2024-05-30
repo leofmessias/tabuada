@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabuada</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        width: 350px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        animation: slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    @keyframes slide-up {
+        0% {
+            transform: translateY(100px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    h1 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+    }
+    input[type="number"]:focus {
+        border-color: #17a2b8;
+    }
+    button {
+        width: 100%;
+        padding: 12px 20px;
+        background-color: #17a2b8;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #138496;
+    }
+    #tabuada {
+        margin-top: 30px;
+        display: none;
+    }
+    #tabuada.show {
+        display: block;
+    }
+    #tabuada h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+    #tabuada div {
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+        font-size: 16px;
+        color: #555;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Gerador de Tabuada</h1>
+    <input type="number" id="numero" placeholder="Digite um número">
+    <button id="gerarBtn">Gerar Tabuada</button>
+    <div id="tabuada"></div>
+</div>
+
+<script>
+    const gerarTabuada = () => {
+        const numero = parseInt(numeroInput.value);
+        const tabuadaElement = document.getElementById("tabuada");
+
+        const gerarLinha = (num1, num2) => `<div>${num1} x ${num2} = ${num1 * num2}</div>`;
+        const tabuadaHTML = [...Array(10).keys()].map(i => gerarLinha(numero, i + 1)).join('');
+
+        tabuadaElement.innerHTML = `<h2>Tabuada do ${numero}</h2>${tabuadaHTML}`;
+        tabuadaElement.classList.add('show');
+    };
+
+    const numeroInput = document.getElementById("numero");
+    const gerarBtn = document.getElementById("gerarBtn");
+    gerarBtn.addEventListener("click", gerarTabuada);
+</script>
+
+</body>
+</html>
